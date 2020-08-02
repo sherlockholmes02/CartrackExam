@@ -5,4 +5,6 @@
     <string name="lbl_login">LOGIN</string>
     <string name="empty_credentials">Username or password cannot be empty</string>
     <string name="close">Close</string>
+    <string name="master_detail_page">Master Detail Page</string>
+    <string name="no_internet">Please check your internet connection</string>
 </resources>

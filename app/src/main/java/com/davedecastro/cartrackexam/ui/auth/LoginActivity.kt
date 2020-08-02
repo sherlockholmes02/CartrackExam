@@ -1,5 +1,6 @@
 package com.davedecastro.cartrackexam.ui.auth
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -11,6 +12,7 @@ import com.davedecastro.cartrackexam.data.db.CartrackDatabase
 import com.davedecastro.cartrackexam.data.db.entities.Country
 import com.davedecastro.cartrackexam.data.repository.UserRepository
 import com.davedecastro.cartrackexam.databinding.ActivityLoginBinding
+import com.davedecastro.cartrackexam.ui.main.MainActivity
 import com.davedecastro.cartrackexam.utils.getCountriesFile
 import com.google.android.material.snackbar.Snackbar
 
@@ -38,7 +40,9 @@ class LoginActivity : AppCompatActivity(), AuthListener {
     }
 
     override fun onSuccessfulLogin() {
-
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     override fun onFailureLogin(message: String) {
