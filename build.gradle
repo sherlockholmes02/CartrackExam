@@ -30,6 +30,7 @@ buildscript {
         google_maps = "1.0.2"
         picasso = "2.71828"
         http_logger = "4.5.0"
+        groupie_version = "2.8.1"
     }
 }
 

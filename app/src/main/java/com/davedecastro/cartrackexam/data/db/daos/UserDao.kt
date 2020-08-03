@@ -1,6 +1,9 @@
 package com.davedecastro.cartrackexam.data.db.daos
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.davedecastro.cartrackexam.data.db.entities.User
 import kotlinx.coroutines.flow.Flow
@@ -51,13 +54,9 @@ interface UserDao : BaseDao<User> {
     )
     override fun clear()
 
-    @Query(
-        """
-            SELECT *
-            FROM users
-            WHERE username = :username AND password = :password
-            LIMIT 1
-        """
-    )
-    fun loginUser(username: String, password: String): User
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertAllUsers(users: List<User>)
+
+    @Query("SELECT * FROM users")
+    fun getUsers(): LiveData<List<User>>
 }

@@ -2,13 +2,13 @@ package com.davedecastro.cartrackexam.ui.auth
 
 import android.view.View
 import androidx.lifecycle.ViewModel
-import com.davedecastro.cartrackexam.data.db.entities.User
-import com.davedecastro.cartrackexam.data.repository.UserRepository
+import com.davedecastro.cartrackexam.data.db.entities.Account
+import com.davedecastro.cartrackexam.data.repository.AccountRepository
 import com.davedecastro.cartrackexam.utils.Coroutines
 
 
 class AuthViewModel(
-    private val userRepository: UserRepository
+    private val accountRepository: AccountRepository
 ) : ViewModel() {
 
     var username: String? = null
@@ -25,7 +25,7 @@ class AuthViewModel(
         }
 
         Coroutines.inputOutput {
-            val user = userRepository.userLogin(username!!, password!!)
+            val user = accountRepository.accountLogin(username!!, password!!)
 
             user?.let {
                 authListener?.onSuccessfulLogin()
@@ -38,10 +38,10 @@ class AuthViewModel(
 
     fun checkIfUserIsPopulated() {
         Coroutines.inputOutput {
-            if (userRepository.checkIfUserIsPopulated() == 0) {
-                userRepository.inserUser(User(username = "admin", password = "1234"))
-                userRepository.inserUser(User(username = "cartrack", password = "1234"))
-                userRepository.inserUser(User(username = "dpdecastro", password = "1234"))
+            if (accountRepository.checkIfUserIsPopulated() == 0) {
+                accountRepository.insertAccount(Account(username = "admin", password = "1234"))
+                accountRepository.insertAccount(Account(username = "cartrack", password = "1234"))
+                accountRepository.insertAccount(Account(username = "dpdecastro", password = "1234"))
             }
         }
     }

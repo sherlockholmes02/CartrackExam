@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.davedecastro.cartrackexam.R
 import com.davedecastro.cartrackexam.data.db.CartrackDatabase
 import com.davedecastro.cartrackexam.data.db.entities.Country
-import com.davedecastro.cartrackexam.data.repository.UserRepository
+import com.davedecastro.cartrackexam.data.repository.AccountRepository
 import com.davedecastro.cartrackexam.databinding.ActivityLoginBinding
 import com.davedecastro.cartrackexam.ui.main.MainActivity
 import com.davedecastro.cartrackexam.utils.getCountriesFile
@@ -23,7 +23,7 @@ class LoginActivity : AppCompatActivity(), AuthListener {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         val cartrackDatabase = CartrackDatabase.getInstance()
-        val userRepository = UserRepository(cartrackDatabase)
+        val userRepository = AccountRepository(cartrackDatabase)
         val factory = AuthViewModelFactory(userRepository)
 
         val viewModel = ViewModelProvider(this, factory).get(AuthViewModel::class.java)

@@ -4,9 +4,14 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "users")
-data class User constructor(
-    @PrimaryKey(autoGenerate = true)
-    var id: Int? = null,
+data class User(
+    @PrimaryKey
+    var id: Int,
+    var name: String,
     var username: String,
-    var password: String
+    var email: String,
+    var address: Address,
+    var phone: String,
+    var website: String,
+    var company: Company
 )

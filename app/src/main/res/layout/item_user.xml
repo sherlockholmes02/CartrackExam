@@ -3,6 +3,9 @@
 
     <data>
 
+        <variable
+            name="user"
+            type="com.davedecastro.cartrackexam.data.db.entities.User" />
 
     </data>
 
@@ -19,7 +22,7 @@
             android:id="@+id/tv_name_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hello"
+            android:text="@{ user.name }"
             android:textColor="@color/colorPrimary"
             android:textSize="22sp" />
 
@@ -27,14 +30,14 @@
             android:id="@+id/tv_username_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hello"
+            android:text="@{ user.username }"
             android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tv_email_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hello"
+            android:text="@{ user.email }"
             android:textSize="18sp" />
 
     </LinearLayout>
