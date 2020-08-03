@@ -31,7 +31,9 @@ class HomeFragment : Fragment(), HomeListener {
 
     private val homeItemAdapter = HomeItemAdapter().apply {
         setOnItemClickListener {
-            requestOnItemClick(it)
+            if (!binding.srlHomeRefresh.isRefreshing) {
+                requestOnItemClick(it)
+            }
         }
     }
 
