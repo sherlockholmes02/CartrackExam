@@ -11,7 +11,7 @@ import kotlinx.coroutines.withContext
 
 
 class UserRepository(
-    private val userService: UserService,
+    private val userService: UserService?,
     private val cartrackDatabase: CartrackDatabase
 ) {
 
@@ -36,9 +36,17 @@ class UserRepository(
         }
     }
 
+    fun isUsersEmpty(): Boolean {
+        return cartrackDatabase.userDao().get().isEmpty()
+    }
+
+    fun clearUsers() {
+        return cartrackDatabase.userDao().clear()
+    }
+
     private suspend fun fetchUsers() {
-        val response = userService.getUsers()
-        users.postValue(response.body())
+        val response = userService?.getUsers()
+        users.postValue(response?.body())
     }
 
     private fun saveUsers(users: List<User>) {

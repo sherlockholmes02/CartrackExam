@@ -4,10 +4,12 @@ import android.view.View
 import androidx.lifecycle.ViewModel
 import com.davedecastro.cartrackexam.data.db.entities.Account
 import com.davedecastro.cartrackexam.data.repository.AccountRepository
+import com.davedecastro.cartrackexam.data.repository.UserRepository
 import com.davedecastro.cartrackexam.utils.Coroutines
 
 class AuthViewModel(
-    private val accountRepository: AccountRepository
+    private val accountRepository: AccountRepository,
+    private val userRepository: UserRepository
 ) : ViewModel() {
 
     var username: String? = null
@@ -40,6 +42,14 @@ class AuthViewModel(
                 accountRepository.insertAccount(Account(username = "admin", password = "1234"))
                 accountRepository.insertAccount(Account(username = "cartrack", password = "1234"))
                 accountRepository.insertAccount(Account(username = "dpdecastro", password = "1234"))
+            }
+        }
+    }
+
+    fun isUsersEmpty() {
+        Coroutines.inputOutput {
+            if (!userRepository.isUsersEmpty()) {
+                authListener?.onSuccessfulLogin()
             }
         }
     }

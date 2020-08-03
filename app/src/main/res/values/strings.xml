@@ -10,4 +10,5 @@
     <string name="no_internet">Please check your internet connection</string>
     <string name="company">Company</string>
     <string name="address">Address</string>
+    <string name="logout">Log-out</string>
 </resources>
