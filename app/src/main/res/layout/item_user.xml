@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -9,36 +11,48 @@
 
     </data>
 
-    <LinearLayout
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:orientation="vertical"
-        android:padding="5dp"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:elevation="8dp">
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="0dp"
+        android:layout_margin="10dp"
+        app:cardElevation="8dp">
 
-        <TextView
-            android:id="@+id/tv_name_user"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{ user.name }"
-            android:textColor="@color/colorPrimary"
-            android:textSize="22sp" />
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="10dp">
 
-        <TextView
-            android:id="@+id/tv_username_user"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{ user.username }"
-            android:textSize="18sp" />
+            <TextView
+                android:id="@+id/tv_name_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{ user.name }"
+                android:textColor="@color/colorPrimary"
+                android:textSize="22sp"
+                tools:text="Hello"/>
 
-        <TextView
-            android:id="@+id/tv_email_user"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{ user.email }"
-            android:textSize="18sp" />
+            <TextView
+                android:id="@+id/tv_username_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{ user.username }"
+                android:textSize="18sp"
+                tools:text="Hello"/>
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tv_email_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{ user.email }"
+                android:textSize="18sp"
+                tools:text="Hello"/>
+
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 </layout>

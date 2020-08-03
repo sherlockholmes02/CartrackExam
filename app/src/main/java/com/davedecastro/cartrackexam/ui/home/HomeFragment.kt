@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -14,16 +15,31 @@ import com.davedecastro.cartrackexam.data.db.CartrackDatabase
 import com.davedecastro.cartrackexam.data.network.UserService
 import com.davedecastro.cartrackexam.data.repository.UserRepository
 import com.davedecastro.cartrackexam.databinding.FragmentHomeBinding
+import com.davedecastro.cartrackexam.ui.home.details.UserDetailsFragment
+import com.davedecastro.cartrackexam.ui.main.MainActivity
 import com.davedecastro.cartrackexam.utils.Coroutines
+import com.davedecastro.cartrackexam.utils.NavigationSingleton
 import com.davedecastro.cartrackexam.utils.RetrofitSingleton
 
 class HomeFragment : Fragment() {
     lateinit var binding: FragmentHomeBinding
     private lateinit var viewModel: HomeViewModel
 
+    private val mainActivity: MainActivity?
+        get() = activity as MainActivity?
+
     private val homeItemAdapter = HomeItemAdapter().apply {
         setOnItemClickListener {
-
+            fragmentManager?.let { fm ->
+                NavigationSingleton.navigate(
+                    fm,
+                    R.id.fl_main_container,
+                    UserDetailsFragment().apply {
+                        user = it
+                    },
+                "UserDetailsFragment"
+                )
+            }
         }
     }
 
@@ -43,7 +59,6 @@ class HomeFragment : Fragment() {
         val userRepository = UserRepository(userService, cartrackDatabase)
         val factory = HomeViewModelFactory(userRepository)
         viewModel = ViewModelProvider(this, factory).get(HomeViewModel::class.java)
-
         bindUI()
     }
 
@@ -61,5 +76,11 @@ class HomeFragment : Fragment() {
             setHasFixedSize(true)
             adapter = homeItemAdapter
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mainActivity?.title = getString(R.string.master_detail_page)
+        mainActivity?.enableBackButton = false
     }
 }

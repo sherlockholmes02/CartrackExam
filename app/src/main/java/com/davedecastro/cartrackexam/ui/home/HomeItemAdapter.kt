@@ -22,7 +22,7 @@ class HomeItemAdapter : ListAdapter<User, HomeItemAdapter.ViewHolder>(
     }
 ) {
 
-    private var onItemClickListener: (Int) -> Unit = { }
+    private var onItemClickListener: (User) -> Unit = { }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
@@ -39,7 +39,7 @@ class HomeItemAdapter : ListAdapter<User, HomeItemAdapter.ViewHolder>(
             val item = currentList[holder.adapterPosition]
 
             holder.binding.root.setOnClickListener {
-                onItemClickListener.invoke(holder.adapterPosition)
+                onItemClickListener.invoke(item)
             }
 
             holder.binding.user = item
@@ -49,7 +49,7 @@ class HomeItemAdapter : ListAdapter<User, HomeItemAdapter.ViewHolder>(
         }
     }
 
-    fun setOnItemClickListener(onItemClickListener: (Int) -> Unit) {
+    fun setOnItemClickListener(onItemClickListener: (User) -> Unit) {
         this.onItemClickListener = onItemClickListener
     }
 
