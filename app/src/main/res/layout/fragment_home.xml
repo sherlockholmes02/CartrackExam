@@ -16,12 +16,6 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_home_masterList"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:listitem="@layout/item_user" />
-
         <ProgressBar
             android:id="@+id/pb_home_loader"
             android:layout_width="wrap_content"
@@ -29,6 +23,13 @@
             android:layout_gravity="center"
             android:visibility="gone"
             android:indeterminateTint="@color/colorPrimary" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_home_masterList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_user"
+            android:visibility="gone"/>
 
         <LinearLayout
             android:id="@+id/ll_home_connection"

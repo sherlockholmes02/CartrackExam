@@ -8,7 +8,10 @@ class HomeViewModel(
     userRepository: UserRepository
 ) : ViewModel(){
 
+    var homeListener: HomeListener? = null
+
     val users by lazyDeferred {
+        homeListener?.onFetchStarted()
         userRepository.getUsers()
     }
 }

@@ -35,10 +35,6 @@ class LoginActivity : AppCompatActivity(), AuthListener {
         viewModel.checkIfUserIsPopulated()
     }
 
-    override fun onStartedLogin() {
-
-    }
-
     override fun onSuccessfulLogin() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)

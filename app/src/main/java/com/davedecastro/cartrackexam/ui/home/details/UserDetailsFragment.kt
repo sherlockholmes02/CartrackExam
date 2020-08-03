@@ -10,8 +10,10 @@ import com.davedecastro.cartrackexam.R
 import com.davedecastro.cartrackexam.data.db.entities.User
 import com.davedecastro.cartrackexam.databinding.FragmentDetailsBinding
 import com.davedecastro.cartrackexam.ui.main.MainActivity
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
 
-class UserDetailsFragment : Fragment() {
+class UserDetailsFragment : Fragment(), OnMapReadyCallback {
     lateinit var binding: FragmentDetailsBinding
     var user: User? = null
 
@@ -36,5 +38,9 @@ class UserDetailsFragment : Fragment() {
         super.onResume()
         mainActivity?.title = getString(R.string.user_detail)
         mainActivity?.enableBackButton = true
+    }
+
+    override fun onMapReady(p0: GoogleMap?) {
+
     }
 }

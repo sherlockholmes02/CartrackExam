@@ -69,6 +69,18 @@
                     android:textSize="18sp"
                     tools:text="Hello" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/address"
+                    android:layout_marginTop="10dp"
+                    android:textSize="18sp" />
+
+                <fragment
+                    android:id="@+id/map_details_address"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp" />
 
             </LinearLayout>
 
@@ -97,7 +109,7 @@
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:text="Company" />
+                    android:text="@string/company" />
 
                 <TextView
                     android:layout_width="wrap_content"

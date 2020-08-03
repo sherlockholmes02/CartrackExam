@@ -78,6 +78,7 @@ dependencies {
 
     // Google Maps
     implementation "com.google.maps.android:android-maps-utils:$google_maps"
+    implementation "com.google.android.gms:play-services-maps:$play_services_location"
 
     // Location
     implementation "com.google.android.gms:play-services-location:$play_services_location"

@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -20,8 +19,9 @@ import com.davedecastro.cartrackexam.ui.main.MainActivity
 import com.davedecastro.cartrackexam.utils.Coroutines
 import com.davedecastro.cartrackexam.utils.NavigationSingleton
 import com.davedecastro.cartrackexam.utils.RetrofitSingleton
+import com.davedecastro.cartrackexam.utils.isServerReachable
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), HomeListener {
     lateinit var binding: FragmentHomeBinding
     private lateinit var viewModel: HomeViewModel
 
@@ -37,7 +37,7 @@ class HomeFragment : Fragment() {
                     UserDetailsFragment().apply {
                         user = it
                     },
-                "UserDetailsFragment"
+                    "UserDetailsFragment"
                 )
             }
         }
@@ -59,12 +59,28 @@ class HomeFragment : Fragment() {
         val userRepository = UserRepository(userService, cartrackDatabase)
         val factory = HomeViewModelFactory(userRepository)
         viewModel = ViewModelProvider(this, factory).get(HomeViewModel::class.java)
-        bindUI()
+        viewModel.homeListener = this
+        checkInternetConnection()
+    }
+
+    private fun checkInternetConnection() {
+        Coroutines.inputOutput {
+            if (isServerReachable()) {
+                bindUI()
+            } else {
+                binding.pbHomeLoader.visibility = View.GONE
+                binding.llHomeConnection.visibility = View.VISIBLE
+            }
+        }
     }
 
     private fun bindUI() = Coroutines.main {
         val users = viewModel.users.await()
         users.observe(viewLifecycleOwner, Observer {
+            if (it.isNotEmpty()) {
+                binding.pbHomeLoader.visibility = View.GONE
+                binding.rvHomeMasterList.visibility = View.VISIBLE
+            }
             homeItemAdapter.submitList(it)
             initRecyclerView()
         })
@@ -82,5 +98,11 @@ class HomeFragment : Fragment() {
         super.onResume()
         mainActivity?.title = getString(R.string.master_detail_page)
         mainActivity?.enableBackButton = false
+    }
+
+    override fun onFetchStarted() {
+        Coroutines.main {
+            binding.pbHomeLoader.visibility = View.VISIBLE
+        }
     }
 }

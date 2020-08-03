@@ -6,7 +6,6 @@ import com.davedecastro.cartrackexam.data.db.entities.Account
 import com.davedecastro.cartrackexam.data.repository.AccountRepository
 import com.davedecastro.cartrackexam.utils.Coroutines
 
-
 class AuthViewModel(
     private val accountRepository: AccountRepository
 ) : ViewModel() {
@@ -17,7 +16,6 @@ class AuthViewModel(
     var authListener: AuthListener? = null
 
     fun onLoginButtonClicked(view: View) {
-        authListener?.onStartedLogin()
 
         if (username.isNullOrEmpty() || password.isNullOrEmpty()) {
             authListener?.onFailureLogin("Username or password cannot be empty")
