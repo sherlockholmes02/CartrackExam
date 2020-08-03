@@ -18,19 +18,25 @@ class UserRepository(
     private val users = MutableLiveData<List<User>>()
 
     init {
-        users.observeForever{
+        users.observeForever {
             saveUsers(it)
         }
     }
 
-    suspend fun getUsers(): LiveData<List<User>>{
-        return withContext(Dispatchers.IO){
+    suspend fun getUsers(): LiveData<List<User>> {
+        return withContext(Dispatchers.IO) {
             fetchUsers()
             cartrackDatabase.userDao().getUsers()
         }
     }
 
-    private suspend fun fetchUsers(){
+    suspend fun getUsersCache(): LiveData<List<User>> {
+        return withContext(Dispatchers.IO) {
+            cartrackDatabase.userDao().getUsers()
+        }
+    }
+
+    private suspend fun fetchUsers() {
         val response = userService.getUsers()
         users.postValue(response.body())
     }

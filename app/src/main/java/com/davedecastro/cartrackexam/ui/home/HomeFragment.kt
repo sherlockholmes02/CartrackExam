@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.davedecastro.cartrackexam.R
 import com.davedecastro.cartrackexam.data.db.CartrackDatabase
+import com.davedecastro.cartrackexam.data.db.entities.User
 import com.davedecastro.cartrackexam.data.network.UserService
 import com.davedecastro.cartrackexam.data.repository.UserRepository
 import com.davedecastro.cartrackexam.databinding.FragmentHomeBinding
@@ -30,16 +31,20 @@ class HomeFragment : Fragment(), HomeListener {
 
     private val homeItemAdapter = HomeItemAdapter().apply {
         setOnItemClickListener {
-            fragmentManager?.let { fm ->
-                NavigationSingleton.navigate(
-                    fm,
-                    R.id.fl_main_container,
-                    UserDetailsFragment().apply {
-                        user = it
-                    },
-                    "UserDetailsFragment"
-                )
-            }
+            requestOnItemClick(it)
+        }
+    }
+
+    private fun requestOnItemClick(user: User) {
+        fragmentManager?.let { fm ->
+            NavigationSingleton.navigate(
+                fm,
+                R.id.fl_main_container,
+                UserDetailsFragment().apply {
+                    this.user = user
+                },
+                "UserDetailsFragment"
+            )
         }
     }
 
@@ -61,6 +66,13 @@ class HomeFragment : Fragment(), HomeListener {
         viewModel = ViewModelProvider(this, factory).get(HomeViewModel::class.java)
         viewModel.homeListener = this
         checkInternetConnection()
+        onRefresh()
+    }
+
+    private fun onRefresh() {
+        binding.srlHomeRefresh.setOnRefreshListener {
+            checkInternetConnection()
+        }
     }
 
     private fun checkInternetConnection() {
@@ -68,8 +80,22 @@ class HomeFragment : Fragment(), HomeListener {
             if (isServerReachable()) {
                 bindUI()
             } else {
-                binding.pbHomeLoader.visibility = View.GONE
-                binding.llHomeConnection.visibility = View.VISIBLE
+                Coroutines.main {
+                    val users = viewModel.usersCache.await()
+                    users.observe(viewLifecycleOwner, Observer {
+                        if (it.isEmpty()) {
+                            binding.pbHomeLoader.visibility = View.GONE
+                            binding.llHomeConnection.visibility = View.VISIBLE
+                            binding.srlHomeRefresh.isRefreshing = false
+                        } else {
+                            binding.pbHomeLoader.visibility = View.GONE
+                            binding.rvHomeMasterList.visibility = View.VISIBLE
+                            binding.srlHomeRefresh.isRefreshing = false
+                            homeItemAdapter.submitList(it)
+                            initRecyclerView()
+                        }
+                    })
+                }
             }
         }
     }
@@ -80,6 +106,7 @@ class HomeFragment : Fragment(), HomeListener {
             if (it.isNotEmpty()) {
                 binding.pbHomeLoader.visibility = View.GONE
                 binding.rvHomeMasterList.visibility = View.VISIBLE
+                binding.srlHomeRefresh.isRefreshing = false
             }
             homeItemAdapter.submitList(it)
             initRecyclerView()
@@ -102,7 +129,9 @@ class HomeFragment : Fragment(), HomeListener {
 
     override fun onFetchStarted() {
         Coroutines.main {
-            binding.pbHomeLoader.visibility = View.VISIBLE
+            if (!binding.srlHomeRefresh.isRefreshing) {
+                binding.pbHomeLoader.visibility = View.VISIBLE
+            }
         }
     }
 }

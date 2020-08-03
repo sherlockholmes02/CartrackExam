@@ -5,7 +5,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.davedecastro.cartrackexam.data.repository.AccountRepository
 
 @Suppress("UNCHECKED_CAST")
-class AuthViewModelFactory(private val accountRepository: AccountRepository): ViewModelProvider.NewInstanceFactory() {
+class AuthViewModelFactory(private val accountRepository: AccountRepository) :
+    ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return AuthViewModel(accountRepository) as T

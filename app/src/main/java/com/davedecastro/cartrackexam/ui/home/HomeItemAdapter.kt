@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.davedecastro.cartrackexam.R
 import com.davedecastro.cartrackexam.data.db.entities.User
 import com.davedecastro.cartrackexam.databinding.ItemUserBinding
-import java.lang.Exception
 
 class HomeItemAdapter : ListAdapter<User, HomeItemAdapter.ViewHolder>(
     object : DiffUtil.ItemCallback<User>() {

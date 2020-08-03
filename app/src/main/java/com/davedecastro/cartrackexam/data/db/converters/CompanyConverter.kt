@@ -7,14 +7,14 @@ import com.google.gson.reflect.TypeToken
 
 class CompanyConverter {
     @TypeConverter
-    fun fromGroupTaskMemberList(value: Company): String {
+    fun companyToString(value: Company): String {
         val gson = Gson()
         val type = object : TypeToken<Company>() {}.type
         return gson.toJson(value, type)
     }
 
     @TypeConverter
-    fun toGroupTaskMemberList(value: String): Company {
+    fun stringToCompany(value: String): Company {
         val gson = Gson()
         val type = object : TypeToken<Company>() {}.type
         return gson.fromJson(value, type)

@@ -1,9 +1,9 @@
 package com.davedecastro.cartrackexam.ui.auth
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -63,7 +63,7 @@ class LoginActivity : AppCompatActivity(), AuthListener {
         }.show()
     }
 
-    private fun populateCountries(){
+    private fun populateCountries() {
         val countries = mutableListOf<Country>()
         countries.addAll(getCountriesFile(this))
         countries.sortBy { it.country }

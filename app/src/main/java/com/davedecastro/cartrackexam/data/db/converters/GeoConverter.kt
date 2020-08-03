@@ -7,8 +7,8 @@ import com.davedecastro.cartrackexam.utils.toJson
 
 class GeoConverter {
     @TypeConverter
-    fun stringToMeasurements(json: String?): List<Geo> = json?.fromJson() ?: listOf()
+    fun stringToGeo(json: String?): List<Geo> = json?.fromJson() ?: listOf()
 
     @TypeConverter
-    fun measurementsToString(list: List<Geo?>?): String = list.toJson()
+    fun geoToString(list: List<Geo?>?): String = list.toJson()
 }

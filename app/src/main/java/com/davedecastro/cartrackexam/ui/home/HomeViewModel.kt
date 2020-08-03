@@ -5,8 +5,8 @@ import com.davedecastro.cartrackexam.data.repository.UserRepository
 import com.davedecastro.cartrackexam.utils.lazyDeferred
 
 class HomeViewModel(
-    userRepository: UserRepository
-) : ViewModel(){
+    private val userRepository: UserRepository
+) : ViewModel() {
 
     var homeListener: HomeListener? = null
 
@@ -14,4 +14,10 @@ class HomeViewModel(
         homeListener?.onFetchStarted()
         userRepository.getUsers()
     }
+
+    val usersCache by lazyDeferred {
+        homeListener?.onFetchStarted()
+        userRepository.getUsersCache()
+    }
+
 }

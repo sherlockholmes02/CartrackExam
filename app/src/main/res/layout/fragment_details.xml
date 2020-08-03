@@ -10,131 +10,139 @@
             type="com.davedecastro.cartrackexam.data.db.entities.User" />
     </data>
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/white"
-        android:padding="20dp">
+        android:fillViewport="true">
 
-        <com.google.android.material.card.MaterialCardView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="0dp"
-            android:layout_margin="10dp"
-            app:cardElevation="8dp">
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="20dp">
 
-            <LinearLayout
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:layout_margin="10dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="8dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{ user.name }"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="25sp"
-                    tools:text="Hello" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{ user.username }"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="18sp"
-                    tools:text="Hello" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{ user.email }"
-                    android:textSize="18sp"
-                    tools:text="Hello" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{ user.phone }"
-                    android:textSize="18sp"
-                    tools:text="Hello" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{ user.website }"
-                    android:textSize="18sp"
-                    tools:text="Hello" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/address"
-                    android:layout_marginTop="10dp"
-                    android:textSize="18sp" />
-
-                <fragment
-                    android:id="@+id/map_details_address"
-                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="300dp" />
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:padding="10dp">
 
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{ user.name }"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="25sp"
+                        tools:text="Hello" />
 
-        </com.google.android.material.card.MaterialCardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{ user.username }"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="18sp"
+                        tools:text="Hello" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{ user.email }"
+                        android:textSize="18sp"
+                        tools:text="Hello" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{ user.phone }"
+                        android:textSize="18sp"
+                        tools:text="Hello" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{ user.website }"
+                        android:textSize="18sp"
+                        tools:text="Hello" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="@string/address"
+                        android:textSize="18sp" />
+
+                    <fragment
+                        android:id="@+id/map_details_address"
+                        android:name="com.google.android.gms.maps.SupportMapFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
 
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="0dp"
-            android:layout_margin="10dp"
-            app:cardElevation="8dp">
-
-            <LinearLayout
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:layout_margin="10dp"
+                android:layout_marginTop="20dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="8dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:text="@string/company" />
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:padding="10dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{ user.company.name }"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="18sp"
-                    tools:text="Hello" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/company"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{ `Catchphrase: ` + user.company.catchPhrase }"
-                    android:textSize="18sp"
-                    tools:text="Hello" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{ user.company.name }"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="18sp"
+                        tools:text="Hello" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{ `BS: ` + user.company.bs }"
-                    android:textSize="18sp"
-                    tools:text="Hello" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{ `Catchphrase: ` + user.company.catchPhrase }"
+                        android:textSize="18sp"
+                        tools:text="Hello" />
 
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{ `BS: ` + user.company.bs }"
+                        android:textSize="18sp"
+                        tools:text="Hello" />
 
-        </com.google.android.material.card.MaterialCardView>
-    </LinearLayout>
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
 </layout>

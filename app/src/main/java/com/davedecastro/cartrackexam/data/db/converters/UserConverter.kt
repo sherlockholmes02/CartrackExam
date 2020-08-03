@@ -7,8 +7,8 @@ import com.davedecastro.cartrackexam.utils.toJson
 
 class UserConverter {
     @TypeConverter
-    fun stringToMeasurements(json: String?): List<User> = json?.fromJson() ?: listOf()
+    fun stringToUser(json: String?): List<User> = json?.fromJson() ?: listOf()
 
     @TypeConverter
-    fun measurementsToString(list: List<User?>?): String = list.toJson()
+    fun userToString(list: List<User?>?): String = list.toJson()
 }
